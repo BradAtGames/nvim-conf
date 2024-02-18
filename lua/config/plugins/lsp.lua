@@ -59,8 +59,8 @@ return {
                 end,
             }
         })
-        -- For mason supported stuff, that isn't supported by mason-lspconfig.
-        require('mason-null-ls').setup({
+        -- For mason supported stuff, that isn"t supported by mason-lspconfig.
+        require("mason-null-ls").setup({
             ensure_installed = {
                 "black",
                 "golines",
@@ -77,11 +77,11 @@ return {
         c.setup({
             snippet = {
                 expand = function(args)
-                    require('snippy').expand_snippet(args.body)
+                    require("snippy").expand_snippet(args.body)
                 end
             },
             mapping = c.mapping.preset.insert({
-                ['<Enter>'] = c.mapping({
+                ["<Enter>"] = c.mapping({
                     i = function(fallback)
                         if c.visible() and c.get_active_entry() then
                             c.confirm({ behavior = c.ConfirmBehavior.Replace, select = false })
@@ -92,7 +92,7 @@ return {
                     s = c.mapping.confirm({ select = true }),
                     c = c.mapping.confirm({ behavior = c.ConfirmBehavior.Replace, select = true }),
                 }),
-                ['<C-n>'] = c.mapping(
+                ["<C-n>"] = c.mapping(
                     function(fallback)
                         if c.visible() then
                             c.select_next_item({ behavior = selector })
@@ -101,7 +101,7 @@ return {
                         end
                     end,
                     { "i", "s", "c", }),
-                ['<C-p>'] = c.mapping(
+                ["<C-p>"] = c.mapping(
                     function(fallback)
                         if c.visible() then
                             c.select_prev_item({ behavior = selector })
@@ -112,9 +112,9 @@ return {
                     { "i", "s", "c", }),
             }),
             sources = c.config.sources({
-                { name = 'nvim_lsp' },
-                { name = 'buffer' },
-                { name = 'snippy' },
+                { name = "nvim_lsp" },
+                { name = "buffer" },
+                { name = "snippy" },
             })
         })
     end
