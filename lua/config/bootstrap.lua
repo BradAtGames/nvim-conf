@@ -11,4 +11,8 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup(plugins,opts)
+require("lazy").setup({
+    spec = "config.plugins",
+    -- Holy shit that notificaon is annoying.
+    change_detection = { notify = false },
+})
