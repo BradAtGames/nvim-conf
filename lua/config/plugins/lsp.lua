@@ -85,6 +85,8 @@ return {
                     i = function(fallback)
                         if c.visible() and c.get_active_entry() then
                             c.confirm({ behavior = c.ConfirmBehavior.Replace, select = false })
+                        elseif require("copilot.suggestion").is_visible() then
+                            require("copilot.suggestion").accept()
                         else
                             fallback()
                         end
@@ -96,6 +98,8 @@ return {
                     function(fallback)
                         if c.visible() then
                             c.select_next_item({ behavior = selector })
+                        elseif require("copilot.suggestion").is_visible() then
+                            require("copilot.suggestion").next()
                         else
                             fallback()
                         end
@@ -105,6 +109,8 @@ return {
                     function(fallback)
                         if c.visible() then
                             c.select_prev_item({ behavior = selector })
+                        elseif require("copilot.suggestion").is_visible() then
+                            require("copilot.suggestion").prev()
                         else
                             fallback()
                         end
@@ -113,7 +119,6 @@ return {
             }),
             sources = c.config.sources({
                 { name = "nvim_lsp" },
-                { name = "buffer" },
                 { name = "snippy" },
             })
         })
