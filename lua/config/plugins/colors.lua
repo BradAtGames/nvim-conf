@@ -1,7 +1,7 @@
 function PickTheme()
     -- If it's before 9AM or after 9PM I'm probably in a darker room. Use a dark theme.
     -- Otherwise, use a light theme, since I don't live in a cave.
-    
+
     -- TODO: It'd be nice to set up auto-switching an existing terminal, but my nvim sessions aren't that long lasting so it isn't pressing.
 
     local time = tonumber(os.date("%H", os.time()))

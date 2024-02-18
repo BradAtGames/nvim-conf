@@ -2,6 +2,10 @@
 vim.opt.nu = true
 vim.opt.relativenumber = true
 
+-- Sanity
+vim.opt.fileformat="unix"
+vim.opt.fileformats="unix,dos"
+
 -- Indentation
 -- Default to spaces, rely on formatters to go back to tabs for languages that
 -- prefer them (e.g. go)
