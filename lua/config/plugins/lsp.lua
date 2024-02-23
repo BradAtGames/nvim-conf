@@ -12,10 +12,12 @@ return {
         "dcampos/cmp-snippy",
         "jay-babu/mason-null-ls.nvim",
         "nvimtools/none-ls.nvim",
+        "zbirenbaum/copilot-cmp"
     },
 
     config = function()
         local c = require("cmp")
+        local cc = require("copilot_cmp")
         local cnl = require("cmp_nvim_lsp")
         local caps =
             vim.tbl_deep_extend("force", {}, vim.lsp.protocol.make_client_capabilities(), cnl.default_capabilities())
@@ -94,6 +96,7 @@ return {
         })
 
         local selector = { behavior = c.SelectBehavior.Select }
+        cc.setup()
         c.setup({
             snippet = {
                 expand = function(args)
@@ -135,8 +138,24 @@ return {
             }),
             sources = c.config.sources({
                 { name = "nvim_lsp" },
+                { name = "copilot" },
                 { name = "snippy" },
             }),
+        })
+
+        vim.api.nvim_create_autocmd('LspAttach', {
+            group = vim.api.nvim_create_augroup('LspKeymaps', {}),
+            callback = function(ev)
+                local opts = { buffer = ev.buf }
+                vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
+                vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+                vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
+                vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
+                vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+                vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
+                vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
+                vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, opts)
+            end,
         })
     end,
 }

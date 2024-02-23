@@ -6,13 +6,10 @@ return {
     config = function()
         require("copilot").setup({
             panel = {
-                enabled = true,
-                auto_refresh = true,
+                enabled = false,
             },
             suggestion = {
-                enabled = true,
-                auto_trigger = true,
-                accept = false,
+                enabled = false,
             },
             settings = {
                 -- Num completions for panel
