@@ -23,6 +23,7 @@ return {
         require("mason-lspconfig").setup({
             ensure_installed = {
                 "ansiblels",
+                "bufls",
                 "clangd",
                 "cmake",
                 "docker_compose_language_service",
@@ -52,6 +53,26 @@ return {
                                     globals = { "vim" },
                                 },
                             },
+                        },
+                    })
+                end,
+
+                ["clangd"] = function()
+                    local lsp = require("lspconfig")
+                    lsp.clangd.setup({
+                        capabilities = caps,
+                        filetypes = { "c", "cc", "cpp", "objc", "objcpp" },
+                        cmd = {
+                            "clangd",
+                            "--background-index",
+                            "--clang-tidy",
+                            "--completion-style=detailed",
+                            "--header-insertion=iwyu",
+                            "--header-insertion-decorators",
+                            "--suggest-missing-includes",
+                            "--cross-file-rename",
+                            "--clang-tidy",
+                            "--clang-tidy-checks=-*,modernize-*",
                         },
                     })
                 end,
