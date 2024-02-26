@@ -115,7 +115,7 @@ return {
                         end
                     end,
                     s = c.mapping.confirm({ select = true }),
-                    c = c.mapping.confirm({ behavior = c.ConfirmBehavior.Replace, select = true }),
+                    c = c.mapping.confirm({ behavior = c.ConfirmBehavior.Replace, select = false }),
                 }),
                 ["<C-n>"] = c.mapping(function(fallback)
                     if c.visible() then
